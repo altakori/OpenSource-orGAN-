@@ -8,3 +8,18 @@
 ```
 change real pictures to comics
 ```
+## Folder structure
+```
+data
+|    \
+|    faces
+|    |  0.jpg
+|    |  1.jpg
+|    |  ...
+|    comics
+|    |  0.jpg
+|    |  1.jpg
+|    |  ...
+|    /
+|   /   
+```
