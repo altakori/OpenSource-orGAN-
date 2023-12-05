@@ -101,7 +101,10 @@ def train():
             d_loss = (real_loss + fake_loss) / 2.
             d_loss.backward()
             optimizer_dis.step()
-            wandb.log({'gen_loss':gen_loss,'pixel_loss':pixel_loss,'g_loss':g_loss,'real_loss':real_loss,'fake_loss':fake_loss,'face':face.to('cpu')[0],'comic':comic.to('cpu'),'fake':fake_comic.to('cpu')[0]})
+        real_face_image = utils.unnormalize(face.to('cpu')[0])
+        real_comic_image = utils.unnormalize(comic.to('cpu')[0])
+        fake_comic_image = utils.unnormalize(fake_comic.to('cpu')[0])
+        wandb.log({f'face':real_face_image,'comic':real_comic_image,'fake':fake_comic_image})
 
         torch.save({'gen':model_gen.state_dict(),
                     'dis':model_dis.state_dict()},
