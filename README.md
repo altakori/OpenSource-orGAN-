@@ -9,7 +9,7 @@
 change real pictures to comics
 ```
 ## Training envirionment
-|CPU|GPU|RAM|RAM|SSD|HDD|OS|
+|CPU|GPU|RAM|RAM|HDD|OS|
 |---|---|---|---|---|---|---|
 |i9-11900K|RTX 3080|128G|2TB|18T|Ubuntu 22.04|
 
