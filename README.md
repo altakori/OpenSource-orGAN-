@@ -23,3 +23,5 @@ data
 |    /
 |   /   
 ```
+## Training Result
+[Train Result(wandb)](https://wandb.ai/takeout/face2comic?workspace=user-takeout)
