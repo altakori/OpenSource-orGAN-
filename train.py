@@ -82,7 +82,7 @@ def train():
             model_gen.zero_grad()
             
             fake_comic = model_gen(face).to(device)
-            out_dis = model_dis(fake_comic, face).to(device)
+            out_dis = model_dis(fake_comic, comic).to(device)
 
             gen_loss = criterion_gen(out_dis, face_label)
             pixel_loss = criterion_dis(fake_comic, comic)
@@ -101,10 +101,8 @@ def train():
             d_loss = (real_loss + fake_loss) / 2.
             d_loss.backward()
             optimizer_dis.step()
-        real_face_image = utils.unnormalize(face.to('cpu')[0])
-        real_comic_image = utils.unnormalize(comic.to('cpu')[0])
-        fake_comic_image = utils.unnormalize(fake_comic.to('cpu')[0])
-        wandb.log({f'face':real_face_image,'comic':real_comic_image,'fake':fake_comic_image})
+
+        wandb.log({'fake':wandb.Image(fake_comic[0].to('cpu'))})
 
         torch.save({'gen':model_gen.state_dict(),
                     'dis':model_dis.state_dict()},

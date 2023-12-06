@@ -1,9 +1,9 @@
 from torch.utils.data import Dataset
+import torchvision.transforms.v2 as T
+import torch
 from os.path import join
 from os import listdir
 from PIL import Image
-import torchvision.transforms.v2 as T
-import torch
 import cv2
 
 class CustomDataset(Dataset):
@@ -17,6 +17,8 @@ class CustomDataset(Dataset):
     def __getitem__(self, index):
         real = Image.open(join(self.path2real, self.img_filenames[index])).convert('RGB')
         comic = Image.open(join(self.path2comic, self.img_filenames[index])).convert('RGB')
+        #real = cv2.imread(join(self.path2real, self.img_filenames[index]))
+        #comic = cv2.imread(join(self.path2comic, self.img_filenames[index]))
         if self.transform:
             real = self.transform(real)
             comic = self.transform(comic)
@@ -28,8 +30,6 @@ class CustomDataset(Dataset):
 
 def unnormalize(image):
     image = (image*0.5 + 0.5) * 255
-    a = T.compose([T.ToDtype(torch.int32, scale=True),
-                    T.ToPILImage()
+    a = T.Compose([T.ToPILImage(),
                     ])
-    a(image)
-    return a
+    return a(image)
