@@ -15,9 +15,9 @@ def train():
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--location', type=str, help="data location", default='./data')
-    parser.add_argument('--lr', type=float, help="learning rate", default=0.001)
+    parser.add_argument('--lr', type=float, help="learning rate", default=0.0001)
     parser.add_argument('--batch_size', type=int, default=64)
-    parser.add_argument('--epoch', type=int, default=100)
+    parser.add_argument('--epoch', type=int, default=500)
     parser.add_argument('--num_workers', type=int, default=8)
     parser.add_argument('--beta1', type=float, default=0.5)
     parser.add_argument('--beta2', type=float, default=0.999)
@@ -102,11 +102,13 @@ def train():
             d_loss.backward()
             optimizer_dis.step()
 
-        wandb.log({'fake':wandb.Image(fake_comic[0].to('cpu'))})
+        wandb.log({'fake':wandb.Image(fake_comic[0].to('cpu')),
+                   'face':wandb.Image(face[0].to('cpu')),
+                   'comic':wandb.Image(comic[0].to('cpu'))})
 
         torch.save({'gen':model_gen.state_dict(),
                     'dis':model_dis.state_dict()},
-                    f'./model/{epoch}.pt')
+                    f'./model/{epoch}-0.0001.pt')
         
     wandb.finish()
 

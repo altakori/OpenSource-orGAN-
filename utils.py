@@ -29,7 +29,7 @@ class CustomDataset(Dataset):
     
 
 def unnormalize(image):
-    image = (image*0.5 + 0.5) * 255
+    image = (image*0.5 + 0.5)
     a = T.Compose([T.ToPILImage(),
                     ])
     return a(image)
