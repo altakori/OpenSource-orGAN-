@@ -8,6 +8,8 @@
 ```
 change real pictures to comics
 ```
+## Dataset
+[Dataset(github](https://github.com/Sxela/face2comics)
 ## Folder structure
 ```
 data
