@@ -5,6 +5,7 @@ import wandb
 import torch
 import torch.nn as nn
 from torch import optim
+from torch.optim.lr_scheduler import StepLR
 import argparse
 #custom library
 import model
@@ -15,9 +16,9 @@ def train():
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--location', type=str, help="data location", default='./data')
-    parser.add_argument('--lr', type=float, help="learning rate", default=0.001)
+    parser.add_argument('--lr', type=float, help="learning rate", default=0.0002)
     parser.add_argument('--batch_size', type=int, default=64)
-    parser.add_argument('--epoch', type=int, default=100)
+    parser.add_argument('--epoch', type=int, default=150)
     parser.add_argument('--num_workers', type=int, default=8)
     parser.add_argument('--beta1', type=float, default=0.5)
     parser.add_argument('--beta2', type=float, default=0.999)
@@ -25,7 +26,7 @@ def train():
 
     wandb.init(
         project="face2comic",
-        name=f"pix2pix",
+        name=f"pix2pix-model-fix",
         config={
             "location":args.location,
             "lr":args.lr,
@@ -37,16 +38,10 @@ def train():
     )
 
     config = wandb.config
-
+    utils.all_seed(42)
     device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
 
-    data_transform = T.Compose([T.Resize((256,256)),
-                                T.ToImage(),
-                                T.ToDtype(torch.float32, scale=True),
-                                T.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5]),
-                                ])
-
-    data = utils.CustomDataset(config.location, transform = data_transform)
+    data = utils.CustomDataset(config.location)
 
     data_loader = DataLoader(data,
                             batch_size=config.batch_size,
@@ -67,6 +62,8 @@ def train():
     patch = (1, 16, 16)
     optimizer_gen = optim.Adam(model_gen.parameters(), lr=config.lr, betas=config.beta)
     optimizer_dis = optim.Adam(model_dis.parameters(), lr=config.lr, betas=config.beta)
+    scheduler_gen = StepLR(optimizer_gen, step_size=20, gamma=0.1)
+    scheduler_dis = StepLR(optimizer_dis, step_size=20, gamma=0.1)
 
     model_gen.train()
     model_dis.train()
@@ -102,11 +99,15 @@ def train():
             d_loss.backward()
             optimizer_dis.step()
 
-        wandb.log({'fake':wandb.Image(fake_comic[0].to('cpu'))})
+        #scheduler_dis.step()
+        #scheduler_gen.step()
+        wandb.log({'fake':wandb.Image(fake_comic[0].to('cpu')),
+                   'face':wandb.Image(face[0].to('cpu')),
+                   'comic':wandb.Image(comic[0].to('cpu'))})
 
         torch.save({'gen':model_gen.state_dict(),
                     'dis':model_dis.state_dict()},
-                    f'./model/{epoch}.pt')
+                    f'./model/{epoch}-0.001-bs-8.pt')
         
     wandb.finish()
 

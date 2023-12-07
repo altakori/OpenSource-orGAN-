@@ -20,7 +20,7 @@ def test():
     args = parser.parse_args()
     device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
     model_gen = model.GeneratorUNet()
-    model_gen.load_state_dict(torch.load('model/99.pt')['gen'])
+    model_gen.load_state_dict(torch.load('model/499-0.001-step.pt')['gen'])
     model_gen.eval()
     model_gen = model_gen.to(device)
 
@@ -34,9 +34,11 @@ def test():
     test_image = data_transform(test_image)
     test_image = test_image.unsqueeze(dim=0)
     test_image = test_image.to(device)
-    test_image = model_gen(test_image).to('cpu')
+    with torch.no_grad():
+        test_image = model_gen(test_image).to('cpu')
 
     test_image = utils.unnormalize(test_image.squeeze(dim=0))
+    print(np.array(test_image))
     cv2.imshow('real',cv2.imread(join(f'{args.location}/faces', '0.jpg')))
     cv2.imshow('comic', cv2.cvtColor(np.array(test_image), cv2.COLOR_RGB2BGR))
     cv2.waitKey()

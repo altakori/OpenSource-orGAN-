@@ -49,16 +49,16 @@ class GeneratorUNet(nn.Module):
         self.down1 = UNetDown(in_channels, 64, normalize=False)
         self.down2 = UNetDown(64,128)                 
         self.down3 = UNetDown(128,256)               
-        self.down4 = UNetDown(256,512,dropout=0.5) 
-        self.down5 = UNetDown(512,512,dropout=0.5)      
-        self.down6 = UNetDown(512,512,dropout=0.5)             
-        self.down7 = UNetDown(512,512,dropout=0.5)              
-        self.down8 = UNetDown(512,512,normalize=False,dropout=0.5)
+        self.down4 = UNetDown(256,512) 
+        self.down5 = UNetDown(512,512)      
+        self.down6 = UNetDown(512,512)             
+        self.down7 = UNetDown(512,512)              
+        self.down8 = UNetDown(512,512,normalize=False)
 
         self.up1 = UNetUp(512,512,dropout=0.5)
         self.up2 = UNetUp(1024,512,dropout=0.5)
         self.up3 = UNetUp(1024,512,dropout=0.5)
-        self.up4 = UNetUp(1024,512,dropout=0.5)
+        self.up4 = UNetUp(1024,512)
         self.up5 = UNetUp(1024,256)
         self.up6 = UNetUp(512,128)
         self.up7 = UNetUp(256,64)
@@ -107,11 +107,10 @@ class Discriminator(nn.Module):
     def __init__(self, in_channels=3):
         super().__init__()
 
-        self.stage_1 = Dis_block(in_channels*2,64,normalize=False)
-        self.stage_2 = Dis_block(64,128)
-        self.stage_3 = Dis_block(128,256)
-        self.stage_4 = Dis_block(256,512)
-
+        self.stage_1 = Dis_block(in_channels*2,64,normalize=False)#128
+        self.stage_2 = Dis_block(64,128)#64
+        self.stage_3 = Dis_block(128, 256)#32
+        self.stage_4 = Dis_block(256,512)#16
         self.patch = nn.Conv2d(512,1,3,padding=1) # 16x16 패치 생성
 
     def forward(self,a,b):
