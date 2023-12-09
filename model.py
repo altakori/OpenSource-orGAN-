@@ -92,7 +92,7 @@ class Dis_block(nn.Module):
     def __init__(self, in_channels, out_channels, normalize=True):
         super().__init__()
 
-        layers = [nn.Conv2d(in_channels, out_channels, 3, stride=2, padding=1)]
+        layers = [nn.Conv2d(in_channels, out_channels, 3, stride=2, padding=1, bias=False)]
         if normalize:
             layers.append(nn.InstanceNorm2d(out_channels))
         layers.append(nn.LeakyReLU(0.2))
@@ -110,8 +110,11 @@ class Discriminator(nn.Module):
         self.stage_1 = Dis_block(in_channels*2,64,normalize=False)#128
         self.stage_2 = Dis_block(64,128)#64
         self.stage_3 = Dis_block(128, 256)#32
-        self.stage_4 = Dis_block(256,512)#16
-        self.patch = nn.Conv2d(512,1,3,padding=1) # 16x16 패치 생성
+        self.stage_4 = nn.Sequential(nn.Conv2d(256,512,4,stride=1,padding=1,bias=False),
+                                     nn.InstanceNorm2d(512),
+                                     nn.LeakyReLU(0.2))#31
+        self.patch = nn.Conv2d(512,1,4,stride=1,padding=1) # 30
+
 
     def forward(self,a,b):
         x = torch.cat((a,b),1)

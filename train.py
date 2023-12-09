@@ -1,4 +1,3 @@
-from torchvision.datasets import ImageFolder
 import torchvision.transforms.v2 as T
 from torch.utils.data.dataloader import DataLoader
 import wandb
@@ -17,8 +16,8 @@ def train():
     parser = argparse.ArgumentParser()
     parser.add_argument('--location', type=str, help="data location", default='./data')
     parser.add_argument('--lr', type=float, help="learning rate", default=0.0002)
-    parser.add_argument('--batch_size', type=int, default=64)
-    parser.add_argument('--epoch', type=int, default=150)
+    parser.add_argument('--batch_size', type=int, default=1)
+    parser.add_argument('--epoch', type=int, default=1000)
     parser.add_argument('--num_workers', type=int, default=8)
     parser.add_argument('--beta1', type=float, default=0.5)
     parser.add_argument('--beta2', type=float, default=0.999)
@@ -26,7 +25,7 @@ def train():
 
     wandb.init(
         project="face2comic",
-        name=f"pix2pix-model-fix",
+        name=f"pix2pix-merge",
         config={
             "location":args.location,
             "lr":args.lr,
@@ -51,15 +50,19 @@ def train():
 
     model_gen = model.GeneratorUNet()
     model_dis = model.Discriminator()
-    model_gen.apply(model.initialize_weights)
-    model_dis.apply(model.initialize_weights)
+    try:
+        model_gen.load_state_dict(torch.load('model/499-0.0001-step.pt')['gen'])
+        model_dis.load_state_dict(torch.load('model/499-0.0001-step.pt')['dis'])
+    except:
+        model_gen.apply(model.initialize_weights)
+        model_dis.apply(model.initialize_weights)
 
     criterion_gen = nn.BCELoss()
     criterion_dis = nn.L1Loss()
 
     lambda_pixel = 100
 
-    patch = (1, 16, 16)
+    patch = (1, 30, 30)
     optimizer_gen = optim.Adam(model_gen.parameters(), lr=config.lr, betas=config.beta)
     optimizer_dis = optim.Adam(model_dis.parameters(), lr=config.lr, betas=config.beta)
     scheduler_gen = StepLR(optimizer_gen, step_size=20, gamma=0.1)
@@ -95,7 +98,7 @@ def train():
             out_dis = model_dis(fake_comic.detach(), face).to(device)
             fake_loss = criterion_gen(out_dis, comic_label)
 
-            d_loss = (real_loss + fake_loss) / 2.
+            d_loss = (real_loss + fake_loss)
             d_loss.backward()
             optimizer_dis.step()
 
@@ -105,10 +108,11 @@ def train():
                    'face':wandb.Image(face[0].to('cpu')),
                    'comic':wandb.Image(comic[0].to('cpu'))})
 
-        torch.save({'gen':model_gen.state_dict(),
-                    'dis':model_dis.state_dict()},
-                    f'./model/{epoch}-0.001-bs-8.pt')
-        
+        if epoch%10==0:
+            torch.save({'gen':model_gen.state_dict(),
+                        'dis':model_dis.state_dict()},
+                        f'./model/{epoch}-merge.pt')
+
     wandb.finish()
 
 if __name__ == "__main__":

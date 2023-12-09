@@ -14,23 +14,23 @@ class CustomDataset(Dataset):
         self.path2real = join(path2img, 'faces')
         self.path2comic = join(path2img, 'comics')
         self.img_filenames = [x for x in listdir(self.path2comic)]
-        self.transform = T.Compose([T.Resize((256,256)),
-                                    T.ToImage(),
+        self.transform = T.Compose([T.ToImage(),
                                     T.ToDtype(torch.float32, scale=True),
                                     T.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5]),
                                     ])
         
     def custom_transform(self,real, comic):
-        # resize = T.Resize((256,256))
-        # real = resize(real)
-        # comic = resize(comic)
-        # i, j, h, w = T.RandomCrop.get_params(real, output_size=(256, 256))
-        # real = T.functional.crop(real, i, j, h, w)
-        # comic = T.functionalcrop(comic, i, j, h, w)
-        if random.random() > 0.5:
-            angle = random.uniform(-5,5)
-            real = T.functional.rotate(real, angle)
-            comic = T.functional.rotate(comic, angle)
+        resize = T.Resize((286,286))
+        real = resize(real)
+        comic = resize(comic)
+        i, j, h, w = T.RandomCrop.get_params(real, output_size=(256, 256))
+        real = T.functional.crop(real, i, j, h, w)
+        comic = T.functional.crop(comic, i, j, h, w)
+        
+        # if random.random() > 0.5:
+        #     angle = random.uniform(-5,5)
+        #     real = T.functional.rotate(real, angle)
+        #     comic = T.functional.rotate(comic, angle)
 
         if random.random() > 0.5:
             real = T.functional.horizontal_flip(real)
