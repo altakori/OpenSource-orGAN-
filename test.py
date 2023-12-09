@@ -20,7 +20,7 @@ def test():
     args = parser.parse_args()
     device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
     model_gen = model.GeneratorUNet()
-    model_gen.load_state_dict(torch.load('model/4.pt')['gen'])
+    model_gen.load_state_dict(torch.load('model/499-0.001-step.pt')['gen'])
     model_gen.eval()
     model_gen = model_gen.to(device)
 
