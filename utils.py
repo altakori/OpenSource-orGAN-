@@ -14,8 +14,7 @@ class CustomDataset(Dataset):
         self.path2real = join(path2img, 'faces')
         self.path2comic = join(path2img, 'comics')
         self.img_filenames = [x for x in listdir(self.path2comic)]
-        self.transform = T.Compose([
-                                    T.ToImage(),
+        self.transform = T.Compose([T.ToImage(),
                                     T.ToDtype(torch.float32, scale=True),
                                     T.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5]),
                                     ])

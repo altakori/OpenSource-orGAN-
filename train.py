@@ -4,6 +4,7 @@ import wandb
 import torch
 import torch.nn as nn
 from torch import optim
+from torch.optim.lr_scheduler import StepLR
 import argparse
 #custom library
 import model
@@ -64,6 +65,8 @@ def train():
     patch = (1, 30, 30)
     optimizer_gen = optim.Adam(model_gen.parameters(), lr=config.lr, betas=config.beta)
     optimizer_dis = optim.Adam(model_dis.parameters(), lr=config.lr, betas=config.beta)
+    scheduler_gen = StepLR(optimizer_gen, step_size=20, gamma=0.1)
+    scheduler_dis = StepLR(optimizer_dis, step_size=20, gamma=0.1)
 
     model_gen.train()
     model_dis.train()
@@ -104,11 +107,12 @@ def train():
         wandb.log({'fake':wandb.Image(fake_comic[0].to('cpu')),
                    'face':wandb.Image(face[0].to('cpu')),
                    'comic':wandb.Image(comic[0].to('cpu'))})
+
         if epoch%10==0:
             torch.save({'gen':model_gen.state_dict(),
                         'dis':model_dis.state_dict()},
                         f'./model/{epoch}-merge.pt')
-        
+
     wandb.finish()
 
 if __name__ == "__main__":

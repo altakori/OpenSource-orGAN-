@@ -115,6 +115,7 @@ class Discriminator(nn.Module):
                                      nn.LeakyReLU(0.2))#31
         self.patch = nn.Conv2d(512,1,4,stride=1,padding=1) # 30
 
+
     def forward(self,a,b):
         x = torch.cat((a,b),1)
         x = self.stage_1(x)
