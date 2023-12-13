@@ -29,6 +29,7 @@
 
 ## Model
 https://drive.google.com/file/d/1sgxcW-dCx7w06zFWDDoRJzl6q3dfhsf5/view?usp=drive_link
+
 https://drive.google.com/file/d/1j5O00NkbG_U8bG_MTODuHPXKVapZcz7q/view?usp=drive_link
 
 ## Folder structure
@@ -49,11 +50,14 @@ data
 
 ## Training Result
 [Train Result(wandb)](https://wandb.ai/takeout/face2comic?workspace=user-takeout)
-https://github.com/altakori/OpenSource-orGAN-/assets/92903593/3ca67167-f873-4606-a2f9-41d7ec728143
+
+![image](https://github.com/altakori/OpenSource-orGAN-/assets/92903593/a240cc22-b9e7-4287-8273-20dbedbc36b1)
 
 ## Reference
 https://www.tensorflow.org/tutorials/generative/pix2pix
+
 https://github.com/Seonghoon-Yu/AI_Paper_Review/blob/master/GAN/pix2pix(2016).ipynb
+
 https://arxiv.org/pdf/1611.07004.pdf
 
 
