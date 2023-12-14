@@ -26,16 +26,15 @@
 
 ## Dataset
 [Dataset(github)](https://github.com/Sxela/face2comics)
+[Comic faces v1(kaggle)](https://www.kaggle.com/datasets/defileroff/comic-faces-paired-synthetic)
+[Comic faces v2(kaggle)](https://www.kaggle.com/datasets/defileroff/comic-faces-paired-synthetic-v2)
 
 ## Model
 https://drive.google.com/file/d/1sgxcW-dCx7w06zFWDDoRJzl6q3dfhsf5/view?usp=drive_link
 
-https://drive.google.com/file/d/1j5O00NkbG_U8bG_MTODuHPXKVapZcz7q/view?usp=drive_link
-
 ## Folder structure
 ```
 data
-|    \
 |    faces
 |    |  0.jpg
 |    |  1.jpg
@@ -44,8 +43,10 @@ data
 |    |  0.jpg
 |    |  1.jpg
 |    |  ...
-|    /
-|   /   
+|
+model1.pt
+|
+test.py
 ```
 
 ## Training Result
