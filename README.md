@@ -33,8 +33,8 @@
 |i9-11900K|RTX 3080|128G|2TB|18T|Ubuntu 22.04|
 
 ## Dataset
-[Dataset(github)](https://github.com/Sxela/face2comics)
-[Comic faces v1(kaggle)](https://www.kaggle.com/datasets/defileroff/comic-faces-paired-synthetic)
+[Dataset(github)](https://github.com/Sxela/face2comics)     
+[Comic faces v1(kaggle)](https://www.kaggle.com/datasets/defileroff/comic-faces-paired-synthetic)     
 [Comic faces v2(kaggle)](https://www.kaggle.com/datasets/defileroff/comic-faces-paired-synthetic-v2)
 
 ## Model
