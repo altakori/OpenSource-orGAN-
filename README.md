@@ -2,8 +2,10 @@
 
 ## Project
 ```
-🖼️change real pictures to comics(real time)
+🖼️change real pictures to comics using opencv(real time)
 ```
+https://www.youtube.com/watch?v=hyeZz83XqY0
+
 ## Demo Link
 [Google Drive](https://drive.google.com/file/d/1gf8eFGyDYY8mwgcsxuldv8F55P2HH5gf/view?usp=sharing)
 
@@ -21,8 +23,6 @@
 - [Reference](#Reference)
 - [Team members](#Team-members)
 - [License](#license)
-
-## 
 
 ## Training envirionment
 |CPU|GPU|RAM|SSD|HDD|OS|
@@ -86,6 +86,8 @@ test.py
 
 ![image](https://github.com/altakori/OpenSource-orGAN-/assets/92903593/a240cc22-b9e7-4287-8273-20dbedbc36b1)
 
+
+
 ## Reference
 https://www.tensorflow.org/tutorials/generative/pix2pix
 
@@ -145,4 +147,4 @@ https://arxiv.org/pdf/1611.07004.pdf
 
 
 ## License
-See the [`LICENSE`](https://github.com/altakori/OpenSource-orGAN-/blob/main/LICENSE) file.
+This project is licensed under the terms of Apache-2.0 License. See the [`LICENSE`](https://github.com/altakori/OpenSource-orGAN-/blob/main/LICENSE) file.
