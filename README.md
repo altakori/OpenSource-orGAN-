@@ -38,13 +38,13 @@
 5. repeat 1~5 until press esc key
 
 ## Package
-Train
+#### Train
 ```
 conda env create --file conda-environment.yaml
 conda activate jy
  ```
 
-Only Test
+#### Only Test
 ```
 python=3.11
 torchvision
@@ -62,7 +62,7 @@ pillow
 [Comic faces v2(kaggle)](https://www.kaggle.com/datasets/defileroff/comic-faces-paired-synthetic-v2)
 
 ## Model
-https://drive.google.com/file/d/1sgxcW-dCx7w06zFWDDoRJzl6q3dfhsf5/view?usp=drive_link
+[Google Drive](https://drive.google.com/file/d/1sgxcW-dCx7w06zFWDDoRJzl6q3dfhsf5/view?usp=drive_link)
 
 ## Folder structure
 ```
