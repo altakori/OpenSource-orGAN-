@@ -2,14 +2,20 @@
 
 ## Project
 ```
-🖼️change real pictures to comics using opencv
+🖼️change real pictures to comics using opencv(real time)
 ```
 https://www.youtube.com/watch?v=hyeZz83XqY0
+
+## Demo Link
+[Google Drive](https://drive.google.com/file/d/1gf8eFGyDYY8mwgcsxuldv8F55P2HH5gf/view?usp=sharing)
 
 ## Table of Contents
 
 - [Project](#Project)
+- [Demo](#Demo)
 - [Training envirionment](#Training-envirionment)
+- [Procedure](#Procedure)
+- [Package](#Package)
 - [Dataset](#Dataset)
 - [Model](#Model)
 - [Folder structure](#Folder-structure)
@@ -23,18 +29,44 @@ https://www.youtube.com/watch?v=hyeZz83XqY0
 |---|---|---|---|---|---|
 |i9-11900K|RTX 3080|128G|2TB|18T|Ubuntu 22.04|
 
+## Procedure
+0. Load generator model
+1. Read camera through Opencv
+2. Resize & Normalize
+3. Insert image into model
+4. Show image through Opencv
+5. repeat 1~5 until press esc key
+
+## Package
+#### Train
+```
+conda env create --file conda-environment.yaml
+conda activate jy
+ ```
+
+#### Only Test
+```
+python=3.11
+torchvision
+torch
+wandb
+argparse
+numpy
+opencv-python
+pillow
+```
+
 ## Dataset
-[Dataset(github)](https://github.com/Sxela/face2comics)
+[Dataset(github)](https://github.com/Sxela/face2comics)     
+[Comic faces v1(kaggle)](https://www.kaggle.com/datasets/defileroff/comic-faces-paired-synthetic)     
+[Comic faces v2(kaggle)](https://www.kaggle.com/datasets/defileroff/comic-faces-paired-synthetic-v2)
 
 ## Model
-https://drive.google.com/file/d/1sgxcW-dCx7w06zFWDDoRJzl6q3dfhsf5/view?usp=drive_link
-
-https://drive.google.com/file/d/1j5O00NkbG_U8bG_MTODuHPXKVapZcz7q/view?usp=drive_link
+[Google Drive](https://drive.google.com/file/d/1sgxcW-dCx7w06zFWDDoRJzl6q3dfhsf5/view?usp=drive_link)
 
 ## Folder structure
 ```
 data
-|    \
 |    faces
 |    |  0.jpg
 |    |  1.jpg
@@ -43,8 +75,10 @@ data
 |    |  0.jpg
 |    |  1.jpg
 |    |  ...
-|    /
-|   /   
+|
+model1.pt
+|
+test.py
 ```
 
 ## Training Result
