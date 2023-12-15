@@ -4,7 +4,8 @@
 ```
 🖼️change real pictures to comics using opencv
 ```
-![image](https://www.youtube.com/watch?v=hyeZz83XqY0)
+[![Video Label](https://www.youtube.com/watch?v=hyeZz83XqY0/0.jpg)]
+(https://www.youtube.com/watch?v=hyeZz83XqY0)
 
 ## Table of Contents
 
