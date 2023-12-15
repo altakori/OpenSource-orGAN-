@@ -4,19 +4,16 @@
 ```
 🖼️change real pictures to comics(real time)
 ```
-
-## Procedure
-0. Load generator model
-1. Read camera through Opencv
-2. Resize & Normalize
-3. Insert image into model
-4. Show image through Opencv
-5. repeat 1~5 until press esc key
+## Demo Link
+[Google Drive](https://drive.google.com/file/d/1gf8eFGyDYY8mwgcsxuldv8F55P2HH5gf/view?usp=sharing)
 
 ## Table of Contents
 
 - [Project](#Project)
+- [Demo](#Demo)
 - [Training envirionment](#Training-envirionment)
+- [Procedure](#Procedure)
+- [Package](#Package)
 - [Dataset](#Dataset)
 - [Model](#Model)
 - [Folder structure](#Folder-structure)
@@ -31,6 +28,33 @@
 |CPU|GPU|RAM|SSD|HDD|OS|
 |---|---|---|---|---|---|
 |i9-11900K|RTX 3080|128G|2TB|18T|Ubuntu 22.04|
+
+## Procedure
+0. Load generator model
+1. Read camera through Opencv
+2. Resize & Normalize
+3. Insert image into model
+4. Show image through Opencv
+5. repeat 1~5 until press esc key
+
+## Package
+Train
+```
+conda env create --file conda-environment.yaml
+conda activate jy
+ ```
+
+Only Test
+```
+python=3.11
+torchvision
+torch
+wandb
+argparse
+numpy
+opencv-python
+pillow
+```
 
 ## Dataset
 [Dataset(github)](https://github.com/Sxela/face2comics)     
