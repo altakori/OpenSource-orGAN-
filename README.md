@@ -2,8 +2,16 @@
 
 ## Project
 ```
-🖼️change real pictures to comics
+🖼️change real pictures to comics(real time)
 ```
+
+## Procedure
+0. Load generator model
+1. Read camera through Opencv
+2. Resize & Normalize
+3. Insert image into model
+4. Show image through Opencv
+5. repeat 1~5 until press esc key
 
 ## Table of Contents
 
