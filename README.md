@@ -2,8 +2,9 @@
 
 ## Project
 ```
-🖼️change real pictures to comics
+🖼️change real pictures to comics using opencv
 ```
+![image](https://www.youtube.com/watch?v=hyeZz83XqY0)
 
 ## Table of Contents
 
@@ -16,8 +17,6 @@
 - [Reference](#Reference)
 - [Team members](#Team-members)
 - [License](#license)
-
-## 
 
 ## Training envirionment
 |CPU|GPU|RAM|SSD|HDD|OS|
@@ -52,6 +51,8 @@ data
 [Train Result(wandb)](https://wandb.ai/takeout/face2comic?workspace=user-takeout)
 
 ![image](https://github.com/altakori/OpenSource-orGAN-/assets/92903593/a240cc22-b9e7-4287-8273-20dbedbc36b1)
+
+
 
 ## Reference
 https://www.tensorflow.org/tutorials/generative/pix2pix
@@ -112,4 +113,4 @@ https://arxiv.org/pdf/1611.07004.pdf
 
 
 ## License
-See the [`LICENSE`](https://github.com/altakori/OpenSource-orGAN-/blob/main/LICENSE) file.
+This project is licensed under the terms of Apache-2.0 License. See the [`LICENSE`](https://github.com/altakori/OpenSource-orGAN-/blob/main/LICENSE) file.
